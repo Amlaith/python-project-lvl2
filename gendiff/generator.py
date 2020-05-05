@@ -11,7 +11,7 @@ def generate_diff(path1, path2):
 
     result = ['{']
 
-    new_keys = set(new.keys()) - set(old.keys())
+    # new_keys = set(new.keys()) - set(old.keys())
 
     for key, value in old.items():
         if key in new and value == new[key]:
@@ -22,8 +22,9 @@ def generate_diff(path1, path2):
         else:
             result.append(to_string(key, value, '-'))
 
-    for key in new_keys:
-        result.append(to_string(key, new[key], '+'))
+    for key, value in new.items():
+        if key not in old:
+            result.append(to_string(key, value, '+'))
 
     result.append('}')
 
