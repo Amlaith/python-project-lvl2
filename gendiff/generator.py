@@ -1,10 +1,11 @@
 import json
 
 
-def generate_diff(path1, path2):
-    def to_string(key, value, sign=' '):
-        return '  {} {}: {}'.format(sign, key, value)
+def to_string(key, value, sign=' '):
+    return '  {} {}: {}'.format(sign, key, value)
 
+
+def generate_diff(path1, path2):
     old = json.load(open(path1))
     new = json.load(open(path2))
 
