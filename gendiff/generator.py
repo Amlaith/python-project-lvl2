@@ -14,12 +14,11 @@ def generate_diff(path1, path2):
     new_keys = set(new.keys()) - set(old.keys())
 
     for key, value in old.items():
-        if key in new:
-            if value == new[key]:
-                result.append(to_string(key, value))
-            else:
-                result.append(to_string(key, value, '-'))
-                result.append(to_string(key, new[key], '+'))
+        if key in new and value == new[key]:
+            result.append(to_string(key, value))
+        elif key in new:
+            result.append(to_string(key, value, '-'))
+            result.append(to_string(key, new[key], '+'))
         else:
             result.append(to_string(key, value, '-'))
 
