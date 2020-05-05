@@ -9,15 +9,18 @@ def generate_diff(path1, path2):
     old = json.load(open(path1))
     new = json.load(open(path2))
 
-    result = [to_string(k, v) if
-        k in new and v == new[k] else
-        to_string(k, v, '-') + '\n' + to_string(k, new[k], '+')
-        if
-            k in new else
-            to_string(k, v, '-')
-        for k, v in old.items()]
+    result = [
+        to_string(k, v) if v == new.get(k)
+        else to_string(k, v, '-') + '\n' + to_string(k, new[k], '+') if k in new
+        else to_string(k, v, '-')
+        for k, v in old.items()
+        ]
 
-    result = result + [to_string(k, v, '+') for k, v in new.items() if k not in old]
+    result = result + [
+        to_string(k, v, '+')
+        for k, v in new.items()
+        if k not in old
+        ]
 
     result = ['{'] + result + ['}']
 
