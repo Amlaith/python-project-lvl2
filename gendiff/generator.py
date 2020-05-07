@@ -1,4 +1,4 @@
-import json
+from .loader import load_files
 
 
 def to_str(key, value, sign=' '):
@@ -8,8 +8,7 @@ def to_str(key, value, sign=' '):
 
 
 def generate_diff(path1, path2):
-    old = json.load(open(path1))
-    new = json.load(open(path2))
+    old, new = load_files(path1, path2)
 
     result = [
         to_str(k, v) if v == new.get(k)
