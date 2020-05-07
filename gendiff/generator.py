@@ -1,7 +1,7 @@
 import json
 
 
-def to_string(key, value, sign=' '):
+def to_str(key, value, sign=' '):
     return '  {} {}: {}'.format(sign, key, value)
 
 
@@ -10,14 +10,14 @@ def generate_diff(path1, path2):
     new = json.load(open(path2))
 
     result = [
-        to_string(k, v) if v == new.get(k)
-        else to_string(k, v, '-') + '\n' + to_string(k, new[k], '+') if k in new
-        else to_string(k, v, '-')
+        to_str(k, v) if v == new.get(k)
+        else to_str(k, v, '-') + '\n' + to_str(k, new[k], '+') if k in new
+        else to_str(k, v, '-')
         for k, v in old.items()
         ]
 
     result = result + [
-        to_string(k, v, '+')
+        to_str(k, v, '+')
         for k, v in new.items()
         if k not in old
         ]
