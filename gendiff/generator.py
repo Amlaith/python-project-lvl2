@@ -2,6 +2,8 @@ import json
 
 
 def to_str(key, value, sign=' '):
+    if type(value) == bool:
+        value = str(value).lower()
     return '  {} {}: {}'.format(sign, key, value)
 
 
